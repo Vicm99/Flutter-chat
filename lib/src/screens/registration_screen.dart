@@ -20,6 +20,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   late String _password;
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  late FocusNode _focusNode;
+
+  @override
+  void dispose() {
+    super.dispose();
+    _focusNode.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +42,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               height: 48.0,
             ),
             AppTextField(
+              focusNode: _focusNode,
               controller: emailController,
               inputText: 'Correo electrónico',
               obscureText: false,
@@ -44,6 +52,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             ),
             const SizedBox(height: 8.0),
             AppTextField(
+              focusNode:,
               controller: passwordController,
               inputText: 'Contraseña',
               obscureText: true,
@@ -61,6 +70,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   if (newUser != null) {
                     Navigator.pushNamed(context, "/chatScreen");
                   }
+                  FocusScope.of(context).requestFocus(_focusNode);
                   //Elimina el texto en el textfield una vez presionado "iniciar sesión"
                   emailController.text = "";
                   passwordController.text = "";
