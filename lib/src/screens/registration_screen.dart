@@ -12,7 +12,7 @@ class RegistrationScreen extends StatefulWidget {
   static const String routeName = "/registration";
 }
 
-class _RegistrationScreenState extends State<RegistrationScreen>  {
+class _RegistrationScreenState extends State<RegistrationScreen> {
   final auth = FirebaseAuth.instance;
 
   late String _email;
@@ -50,7 +50,7 @@ class _RegistrationScreenState extends State<RegistrationScreen>  {
           AppButton(
               name: 'Registrarse',
               color: Colors.amberAccent,
-              onPress: ()async{
+              onPress: () async {
                 try {
                   var newUser = await auth.createUserWithEmailAndPassword(
                       email: _email, password: _password);
