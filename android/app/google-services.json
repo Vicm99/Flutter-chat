@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "460616993221",
+    "project_id": "pacman-chat",
+    "storage_bucket": "pacman-chat.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:460616993221:android:e050df31727dbf907063ac",
+        "android_client_info": {
+          "package_name": "com.pacmanv.pacmanchat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "460616993221-hna1edqqaoqpci52j8r1u1fp6vidfn7q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDO8w3sN4iTow0iyTqf8d4Vuletf_GZHWs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "460616993221-hna1edqqaoqpci52j8r1u1fp6vidfn7q.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "460616993221-uv40fdkbsv0qmv07srprod0pj9ru68gs.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.pacmanv.pacmanchat"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
