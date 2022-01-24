@@ -61,6 +61,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   if (newUser != null) {
                     Navigator.pushNamed(context, "/chatScreen");
                   }
+                  //Elimina el texto en el textfield una vez presionado "iniciar sesión"
                   emailController.text = "";
                   passwordController.text = "";
                 })

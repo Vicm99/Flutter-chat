@@ -15,8 +15,15 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   late String _email;
   late String _password;
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+  late FocusNode _focusNode;
+
+  @override
+  void dispose() {
+    super.dispose();
+    _focusNode.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +39,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 48.0,
               ),
               AppTextField(
-                controller: emailController,
+                focusNode: _focusNode,
+                controller: _emailController,
                 inputText: 'Correo electrónico',
                 obscureText: false,
                 onChanged: (value) {
@@ -41,7 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               const SizedBox(height: 8.0),
               AppTextField(
-                controller: passwordController,
+                controller: _passwordController,
                 inputText: 'Contraseña',
                 obscureText: true,
                 onChanged: (value) {
@@ -58,8 +66,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   if (user != null) {
                     Navigator.pushNamed(context, "/chatScreen");
                   }
-                  emailController.text = "";
-                  passwordController.text = "";
+                  FocusScope.of(context).requestFocus(_focusNode);
+                  //Elimina el texto en el textfield una vez presionado "iniciar sesión"
+                  _emailController.text = "";
+                  _passwordController.text = "";
                 },
               )
             ],
