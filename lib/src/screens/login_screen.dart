@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pacmanchat/src/services/authentication.dart';
 import 'package:pacmanchat/src/widgets/app_button.dart';
 import 'package:pacmanchat/src/widgets/app_icon.dart';
 import 'package:pacmanchat/src/widgets/app_textfield.dart';
@@ -12,6 +13,9 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  late String _email;
+  late String _password;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,14 +29,33 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(
                 height: 48.0,
               ),
-              AppTextField(inputText: 'Correo electrónico',obscureText: false, onChanged: (value){},),
+              AppTextField(
+                inputText: 'Correo electrónico',
+                obscureText: false,
+                onChanged: (value) {
+                  _email = value;
+                },
+              ),
               const SizedBox(height: 8.0),
-              AppTextField(inputText: 'Contraseña',obscureText: true, onChanged:(value){},),
+              AppTextField(
+                inputText: 'Contraseña',
+                obscureText: true,
+                onChanged: (value) {
+                  _password = value;
+                },
+              ),
               const SizedBox(height: 23.0),
               AppButton(
-                  name: 'Iniciar Sesión',
-                  color: Colors.redAccent,
-                  onPress: () {})
+                name: 'Iniciar Sesión',
+                color: Colors.redAccent,
+                onPress: () async {
+                  var user = Authentication()
+                      .logginUser(email: _email, password: _password);
+                  if (user != null) {
+                    Navigator.pushNamed(context, "/chatScreen");
+                  }
+                },
+              )
             ],
           )),
     );

@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:pacmanchat/src/services/authentication.dart';
 
 
 class ChatScreen extends StatefulWidget {
@@ -12,7 +13,7 @@ class ChatScreen extends StatefulWidget {
 
 class _ChatScreenState extends State<ChatScreen> {
   final auth = FirebaseAuth.instance;
-  late User loggedInUser;
+   late User loggedInUser;
 
   @override
   void initState() {
@@ -20,14 +21,10 @@ class _ChatScreenState extends State<ChatScreen> {
     getCurrentUser();
   }
   void getCurrentUser() async {
-    try {
-      var user = await auth.currentUser;
+      var user =  Authentication().getCurrentUser();
       if (user != null) {
-        loggedInUser = user;
+        loggedInUser = user as User;
       }
-    } catch (e) {
-      print(e);
-    }
   }
 
   @override

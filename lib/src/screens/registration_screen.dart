@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pacmanchat/src/services/authentication.dart';
 import 'package:pacmanchat/src/widgets/app_button.dart';
 import 'package:pacmanchat/src/widgets/app_icon.dart';
 import 'package:pacmanchat/src/widgets/app_textfield.dart';
@@ -50,19 +51,15 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           AppButton(
               name: 'Registrarse',
               color: Colors.amberAccent,
-              onPress: () async {
-                try {
-                  var newUser = await auth.createUserWithEmailAndPassword(
-                      email: _email, password: _password);
-                  if (newUser != null) {
-                    Navigator.pushNamed(context, "/chatScreen");
-                  }
-                } catch (e) {
-                  print(e);
+              onPress:()async {
+                var newUser = await Authentication().createUser(
+                    email: _email, password: _password);
+                if (newUser != null) {
+                  Navigator.pushNamed(context, "/chatScreen");
                 }
-              }),
-        ],
+              }
+          )],),
       ),
-    ));
+    );
   }
 }
