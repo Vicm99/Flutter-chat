@@ -27,6 +27,8 @@ class PasswordTextfield extends StatelessWidget {
           enabledBorder: const OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(32.0)),
               borderSide: BorderSide(color: Colors.lightBlueAccent, width: 2))),
+      onChanged: onChanged,
+      textAlign: TextAlign.center,
     );
   }
 }
