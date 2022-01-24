@@ -18,47 +18,54 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
   late String _email;
   late String _password;
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
-      padding: const EdgeInsets.symmetric(horizontal: 24),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          AppIcon(),
-          const SizedBox(
-            height: 48.0,
-          ),
-          AppTextField(
-            inputText: 'Correo electrónico',
-            obscureText: false,
-            onChanged: (value) {
-              _email = value;
-            },
-          ),
-          const SizedBox(height: 8.0),
-          AppTextField(
-            inputText: 'Contraseña',
-            obscureText: true,
-            onChanged: (value) {
-              _password = value;
-            },
-          ),
-          const SizedBox(height: 23.0),
-          AppButton(
-              name: 'Registrarse',
-              color: Colors.amberAccent,
-              onPress:()async {
-                var newUser = await Authentication().createUser(
-                    email: _email, password: _password);
-                if (newUser != null) {
-                  Navigator.pushNamed(context, "/chatScreen");
-                }
-              }
-          )],),
+      body: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 24),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            AppIcon(),
+            const SizedBox(
+              height: 48.0,
+            ),
+            AppTextField(
+              controller: emailController,
+              inputText: 'Correo electrónico',
+              obscureText: false,
+              onChanged: (value) {
+                _email = value;
+              },
+            ),
+            const SizedBox(height: 8.0),
+            AppTextField(
+              controller: passwordController,
+              inputText: 'Contraseña',
+              obscureText: true,
+              onChanged: (value) {
+                _password = value;
+              },
+            ),
+            const SizedBox(height: 23.0),
+            AppButton(
+                name: 'Registrarse',
+                color: Colors.amberAccent,
+                onPress: () async {
+                  var newUser = await Authentication()
+                      .createUser(email: _email, password: _password);
+                  if (newUser != null) {
+                    Navigator.pushNamed(context, "/chatScreen");
+                  }
+                  emailController.text = "";
+                  passwordController.text = "";
+                })
+          ],
+        ),
       ),
     );
   }

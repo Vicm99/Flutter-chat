@@ -15,6 +15,8 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   late String _email;
   late String _password;
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 48.0,
               ),
               AppTextField(
+                controller: emailController,
                 inputText: 'Correo electrónico',
                 obscureText: false,
                 onChanged: (value) {
@@ -38,6 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               const SizedBox(height: 8.0),
               AppTextField(
+                controller: passwordController,
                 inputText: 'Contraseña',
                 obscureText: true,
                 onChanged: (value) {
@@ -54,6 +58,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   if (user != null) {
                     Navigator.pushNamed(context, "/chatScreen");
                   }
+                  emailController.text = "";
+                  passwordController.text = "";
                 },
               )
             ],

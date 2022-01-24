@@ -4,7 +4,7 @@ import 'package:pacmanchat/src/services/authentication.dart';
 
 
 class ChatScreen extends StatefulWidget {
-  ChatScreen({Key? key}) : super(key: key);
+
 
   static const String routeName = "/chatScreen";
 
@@ -32,6 +32,12 @@ class _ChatScreenState extends State<ChatScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('PACMAN'),
+        actions: <Widget>[
+          IconButton(icon: Icon(Icons.logout), onPressed: (){
+            Authentication().signOut();
+            Navigator.pop(context);
+          },)
+        ],
       ),
     );
   }
