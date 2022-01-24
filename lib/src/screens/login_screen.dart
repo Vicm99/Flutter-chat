@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:pacmanchat/src/services/authentication.dart';
 import 'package:pacmanchat/src/widgets/app_button.dart';
 import 'package:pacmanchat/src/widgets/app_icon.dart';
-import 'package:pacmanchat/src/widgets/app_textfield.dart';
+import 'package:pacmanchat/src/widgets/email_textfield.dart';
+import 'package:pacmanchat/src/widgets/password_textfield.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -18,6 +19,14 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   late FocusNode _focusNode;
+
+  @override
+  void initState() {
+    super.initState();
+    _focusNode = FocusNode();
+    _emailController = TextEditingController();
+    _passwordController = TextEditingController();
+  }
 
   @override
   void dispose() {
@@ -38,24 +47,22 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(
                 height: 48.0,
               ),
-              AppTextField(
-                focusNode: _focusNode,
-                controller: _emailController,
+              EmailTextfield(
                 inputText: 'Correo electrónico',
-                obscureText: false,
+                controller: _emailController,
+                focusNode: _focusNode,
                 onChanged: (value) {
                   _email = value;
                 },
               ),
               const SizedBox(height: 8.0),
-              AppTextField(
-                controller: _passwordController,
-                inputText: 'Contraseña',
-                obscureText: true,
-                onChanged: (value) {
-                  _password = value;
-                },
-              ),
+              PasswordTextfield(
+                  inputText: 'Contraseña',
+                  ObscureText: true,
+                  controller: _passwordController,
+                  onChanged: (value) {
+                    _password = value;
+                  }),
               const SizedBox(height: 23.0),
               AppButton(
                 name: 'Iniciar Sesión',

@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:pacmanchat/src/services/authentication.dart';
 import 'package:pacmanchat/src/widgets/app_button.dart';
 import 'package:pacmanchat/src/widgets/app_icon.dart';
-import 'package:pacmanchat/src/widgets/app_textfield.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:pacmanchat/src/widgets/email_textfield.dart';
+import 'package:pacmanchat/src/widgets/password_textfield.dart';
 
 class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({Key? key}) : super(key: key);
@@ -18,9 +19,17 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
   late String _email;
   late String _password;
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
   late FocusNode _focusNode;
+
+  @override
+  void initState() {
+    super.initState();
+    _focusNode = FocusNode();
+    _emailController = TextEditingController();
+    _passwordController = TextEditingController();
+  }
 
   @override
   void dispose() {
@@ -41,25 +50,21 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             const SizedBox(
               height: 48.0,
             ),
-            AppTextField(
-              focusNode: _focusNode,
-              controller: emailController,
-              inputText: 'Correo electrónico',
-              obscureText: false,
-              onChanged: (value) {
-                _email = value;
-              },
-            ),
+            EmailTextfield(
+                inputText: 'Correo electrónico',
+                controller: _emailController,
+                focusNode: _focusNode,
+                onChanged: (value) {
+                  _email = value;
+                }),
             const SizedBox(height: 8.0),
-            AppTextField(
-              focusNode:,
-              controller: passwordController,
-              inputText: 'Contraseña',
-              obscureText: true,
-              onChanged: (value) {
-                _password = value;
-              },
-            ),
+            PasswordTextfield(
+                inputText: 'Contraseña',
+                ObscureText: true,
+                controller: _passwordController,
+                onChanged: (value) {
+                  _password = value;
+                }),
             const SizedBox(height: 23.0),
             AppButton(
                 name: 'Registrarse',
@@ -72,8 +77,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   }
                   FocusScope.of(context).requestFocus(_focusNode);
                   //Elimina el texto en el textfield una vez presionado "iniciar sesión"
-                  emailController.text = "";
-                  passwordController.text = "";
+                  _emailController.text = "";
+                  _passwordController.text = "";
                 })
           ],
         ),

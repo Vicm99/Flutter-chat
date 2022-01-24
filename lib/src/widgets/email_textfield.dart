@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 
-class AppTextField extends StatelessWidget {
+class EmailTextfield extends StatelessWidget {
   final String inputText;
   final ValueChanged<String> onChanged;
-  final bool obscureText;
   final TextEditingController controller;
   final FocusNode focusNode;
 
-  const AppTextField(
+  const EmailTextfield(
       {required this.inputText,
-      required this.onChanged,
-      required this.obscureText,
-      required this.controller,required this.focusNode});
-
+      required this.controller,
+      required this.focusNode,
+      required this.onChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +29,6 @@ class AppTextField extends StatelessWidget {
               borderSide: BorderSide(color: Colors.lightBlueAccent, width: 2))),
       onChanged: onChanged,
       textAlign: TextAlign.center,
-      obscureText: obscureText,
     );
   }
 }
