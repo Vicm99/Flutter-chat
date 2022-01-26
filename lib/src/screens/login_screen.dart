@@ -4,6 +4,7 @@ import 'package:pacmanchat/src/widgets/app_button.dart';
 import 'package:pacmanchat/src/widgets/app_icon.dart';
 import 'package:pacmanchat/src/widgets/email_textfield.dart';
 import 'package:pacmanchat/src/widgets/password_textfield.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -19,7 +20,7 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   late FocusNode _focusNode;
-  late  bool showSpinner = false;
+  bool showSpinner = false;
 
   @override
   void initState() {
@@ -44,7 +45,9 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
+      body: ModalProgressHUD(
+        inAsyncCall: showSpinner,
+          child:Container(
               padding: const EdgeInsets.symmetric(horizontal: 24),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -89,6 +92,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                   )
                 ],
-              )));
+              ))));
   }
 }
